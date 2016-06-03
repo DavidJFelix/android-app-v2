@@ -1,5 +1,6 @@
 package co.instameals.dinnersolutions;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        //inject(this)
+        inject(this);
         ButterKnife.bind(this);
 
         // Initialize Facebook SDK
@@ -54,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void inject(Context context) {
+        DinnerSolutionsApplication application = DinnerSolutionsApplication.from(context);
+        application.component().inject(this);
     }
 
     @Override

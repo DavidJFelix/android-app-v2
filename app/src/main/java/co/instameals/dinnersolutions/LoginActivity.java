@@ -3,6 +3,7 @@ package co.instameals.dinnersolutions;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -32,6 +33,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -56,21 +60,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private UserLoginTask mAuthTask = null;
 
-    // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+
+    @BindView(R.id.email)
+    AutoCompleteTextView mEmailView;
+    @BindView(R.id.password)
+    EditText mPasswordView;
+    @BindView(R.id.login_progress)
+    View mProgressView;
+    @BindView(R.id.login_form)
+    View mLoginFormView;
+    @BindView(R.id.email_sign_in_button)
+    Button mEmailSignInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        init();
+    }
+
+    private void init() {
+        inject(this);
+        ButterKnife.bind(this);
+
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -82,16 +97,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
+    }
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+    private void inject(Context context) {
+        DinnerSolutionsApplication application = DinnerSolutionsApplication.from(context);
+        application.component().inject(this);
     }
 
     private void populateAutoComplete() {

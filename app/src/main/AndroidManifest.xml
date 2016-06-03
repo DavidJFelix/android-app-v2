@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".DinnerSolutionsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -40,7 +41,7 @@
         <service
             android:name=".DinnerSolutionsAPI"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     </application>
 
 </manifest>
