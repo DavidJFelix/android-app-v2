@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.neenbedankt.android-apt'
 
 buildscript {
@@ -9,6 +11,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.2'
     }
 }
 
@@ -29,6 +32,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
 dependencies {
@@ -42,6 +48,9 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
 
 
+    // Jodatime because pre java8 time sucks
+    compile 'joda-time:joda-time:2.9.4'
+
     // Facebook SDK for login
     compile 'com.facebook.android:facebook-android-sdk:4.12.1'
 
@@ -53,4 +62,8 @@ dependencies {
     // Butterknife for view injection
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
