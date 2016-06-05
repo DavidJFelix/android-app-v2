@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = {})
+@Module(includes = {APIClientModule.class})
 public class DataModule {
 
     @Provides
