@@ -39,7 +39,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Junit used for unit testing
     testCompile 'junit:junit:4.12'
+
+    // JSON unit for unit testing JSON serialization
+    testCompile 'net.javacrumbs.json-unit:json-unit:1.12.1'
 
     // Base android libraries needed
     compile 'com.android.support:appcompat-v7:23.4.0'
@@ -63,6 +68,11 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Jackson for JSON serialize/deserialize
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.4'
+    compile 'com.fasterxml.jackson.module:jackson-module-kotlin:2.7.4'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.4'
 }
 repositories {
     mavenCentral()
