@@ -1,38 +1,40 @@
 package co.instameals.dinnersolutions.api.v2.model
 
-import co.instameals.dinnersolutions.api.v2.utils.Relation
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import org.joda.time.DateTime
-import java.util.*
+import co.instameals.dinnersolutions.api.v2.request.MealRequest
+import co.instameals.dinnersolutions.api.v2.response.AddressResponse
+import co.instameals.dinnersolutions.api.v2.response.ImageResponse
+import co.instameals.dinnersolutions.api.v2.response.PriceResponse
+import co.instameals.dinnersolutions.api.v2.utils.MealRequestBuilder
+import rx.Observable
+import rx.functions.Func1
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-data class Meal(
-        var id: UUID?,
-        var name: String,
-        var description: String,
-        var allergens: List<Relation<Allergen>>,
 
-        @JsonProperty("dietary_filters")
-        var dietaryFilters: List<Relation<DietaryFilter>>,
-        var ingredients: List<Relation<Ingredient>>,
 
-        @JsonProperty("pickup_address")
-        var pickupAddress: Relation<Address>,
-        var portions: Int,
+class Meal(val address: Address, val price: Price, val previewImage: Image) {
 
-        @JsonProperty("portions_available")
-        var portionsAvailable: Int,
-        var price: Relation<Price>,
+    fun buildNestedRequest(
+            addressBuilder:  (a: Address) -> Observable<AddressResponse>,
+            priceBuilder: (p: Price) -> Observable<PriceResponse>,
+            previewImageBuilder:  (Image) -> Observable<ImageResponse>
+    ): Observable<MealRequest> {
 
-        @JsonProperty("available_from")
-        var availableFrom: DateTime,
+        return Observable.just(MealRequestBuilder()).zipWith(
+                addressBuilder(address),
+                {m, a -> m.addressId = a.id; m}
+        ).zipWith(
+                priceBuilder(price),
+                {m, p -> m.priceId = p.id; m}
+        ).zipWith(
+                previewImageBuilder(previewImage),
+                {m, i -> m.previewImageId = i.id; m}
+        ).map({m -> buildRequest(m)})
+    }
 
-        @JsonProperty("available_to")
-        var availableTo: DateTime,
-        var seller: Relation<APIUser>,
-
-        @JsonProperty("preview_image")
-        var previewImage: Relation<Image>,
-        var images: List<Relation<Image>>
-)
+    fun buildRequest(mealRequestBuilder: MealRequestBuilder): MealRequest {
+        return MealRequest(
+                addressId = mealRequestBuilder.addressId!!,
+                previewImageId = mealRequestBuilder.previewImageId!!,
+                priceId = mealRequestBuilder.priceId!!
+        )
+    }
+}
