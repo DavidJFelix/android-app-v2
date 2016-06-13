@@ -6,6 +6,7 @@ import android.content.Context;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
+import co.instameals.dinnersolutions.dagger.APIClientModule;
 import co.instameals.dinnersolutions.dagger.DataModule;
 import co.instameals.dinnersolutions.dagger.DinnerSolutionsComponent;
 import co.instameals.dinnersolutions.dagger.DaggerDinnerSolutionsComponent;
@@ -25,6 +26,7 @@ public class DinnerSolutionsApplication extends Application {
     public void buildComponentAndInject() {
         dinnerSolutionsComponent = DaggerDinnerSolutionsComponent.builder()
                 .dataModule(new DataModule())
+                .aPIClientModule(new APIClientModule())
                 .build();
         dinnerSolutionsComponent.inject(this);
     }

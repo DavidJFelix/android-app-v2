@@ -8,7 +8,7 @@ import co.instameals.dinnersolutions.MainActivity;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {DataModule.class})
+@Component(modules = {DataModule.class, APIClientModule.class})
 public interface DinnerSolutionsComponent {
     void inject(DinnerSolutionsApplication application);
 

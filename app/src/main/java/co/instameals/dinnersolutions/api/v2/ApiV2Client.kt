@@ -4,7 +4,7 @@ import co.instameals.dinnersolutions.api.v2.model.*
 import co.instameals.dinnersolutions.api.v2.response.*
 import rx.Observable
 
-class ApiV2(var dinnerSolutionsApiV2: DinnerSolutionsApiV2) {
+class ApiV2Client(var dinnerSolutionsApiV2: DinnerSolutionsApiV2) {
 
     fun createNewAddress(newAddress: Address): Observable<AddressResponse> {
         return dinnerSolutionsApiV2.postAddress(newAddress.toRequest())

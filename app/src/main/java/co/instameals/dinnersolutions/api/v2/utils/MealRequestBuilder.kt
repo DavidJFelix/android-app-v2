@@ -2,7 +2,7 @@ package co.instameals.dinnersolutions.api.v2.utils
 
 import java.util.*
 
-class MealRequestBuilder(
+data class MealRequestBuilder(
         var addressId: UUID? = null,
         var previewImageId: UUID? = null,
         var priceId: UUID? = null

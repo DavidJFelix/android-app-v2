@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -29,6 +30,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +78,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     View mLoginFormView;
     @BindView(R.id.email_sign_in_button)
     Button mEmailSignInButton;
+    @BindView(R.id.facebook_login_button)
+    LoginButton mFBLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +88,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         init();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     private void init() {
         inject(this);
         ButterKnife.bind(this);
 
         // Set up the login form.
         populateAutoComplete();
+
+        CallbackManager callbackManager = CallbackManager.Factory.create();
 
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -101,6 +119,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        mFBLoginButton.setReadPermissions("email");
+        mFBLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
             }
         });
     }

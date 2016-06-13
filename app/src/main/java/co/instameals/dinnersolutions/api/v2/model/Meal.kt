@@ -1,20 +1,16 @@
 package co.instameals.dinnersolutions.api.v2.model
 
 import co.instameals.dinnersolutions.api.v2.request.MealRequest
-import co.instameals.dinnersolutions.api.v2.response.AddressResponse
-import co.instameals.dinnersolutions.api.v2.response.ImageResponse
-import co.instameals.dinnersolutions.api.v2.response.PriceResponse
+import co.instameals.dinnersolutions.api.v2.response.*
 import co.instameals.dinnersolutions.api.v2.utils.MealRequestBuilder
 import rx.Observable
-import rx.functions.Func1
-
 
 
 class Meal(val address: Address, val price: Price, val previewImage: Image) {
 
     fun buildNestedRequest(
-            addressBuilder:  (a: Address) -> Observable<AddressResponse>,
-            priceBuilder: (p: Price) -> Observable<PriceResponse>,
+            addressBuilder:  (Address) -> Observable<AddressResponse>,
+            priceBuilder: (Price) -> Observable<PriceResponse>,
             previewImageBuilder:  (Image) -> Observable<ImageResponse>
     ): Observable<MealRequest> {
 

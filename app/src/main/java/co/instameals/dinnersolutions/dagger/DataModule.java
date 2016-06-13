@@ -11,6 +11,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule;
 
 import javax.inject.Singleton;
 
+import co.instameals.dinnersolutions.api.v2.AuthManager;
 import dagger.Module;
 import dagger.Provides;
 
@@ -21,6 +22,12 @@ public class DataModule {
     @Singleton
     SharedPreferences provideSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    @Provides
+    @Singleton
+    AuthManager provideAuthManager(SharedPreferences sharedPreferences) {
+        return new AuthManager(sharedPreferences);
     }
 
     @Provides
