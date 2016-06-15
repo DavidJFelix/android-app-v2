@@ -12,13 +12,24 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="false">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="Preview image"
+                android:src="@android:drawable/ic_menu_camera"
+                android:paddingTop="70dp"
+                android:paddingBottom="70dp"
+                android:background="@color/dim_foreground_material_dark" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -27,9 +38,9 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Meal Name"
+                    android:hint="Title"
                     android:inputType="text"
-                    android:singleLine="true"/>
+                    android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -41,9 +52,9 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
                     android:hint="Description"
-                    android:singleLine="false"/>
+                    android:inputType="textMultiLine"
+                    android:singleLine="false" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -56,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Portions"
                     android:inputType="number"
-                    android:singleLine="true"/>
+                    android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -68,11 +79,40 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Portions Available"
-                    android:inputType="number"
-                    android:singleLine="true"/>
-
+                    android:hint="Price"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    style="@android:style/Widget.EditText"
+                    android:id="@+id/available_from_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:hint="Available From"
+                    android:onClick="showTimePickerDialog"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    style="@android:style/Widget.EditText"
+                    android:id="@+id/available_to_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Available To"
+                    android:onClick="showDatePickerDialog"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
