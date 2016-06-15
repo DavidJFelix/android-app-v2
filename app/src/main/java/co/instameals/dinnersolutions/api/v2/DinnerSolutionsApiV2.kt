@@ -1,7 +1,7 @@
 package co.instameals.dinnersolutions.api.v2
 
-import co.instameals.dinnersolutions.api.v2.request.*
-import co.instameals.dinnersolutions.api.v2.response.*
+import co.instameals.dinnersolutions.api.v2.requests.*
+import co.instameals.dinnersolutions.api.v2.responses.*
 import retrofit2.http.*
 import rx.Observable
 

@@ -22,8 +22,7 @@
     <string name="facebook_app_id">520603748143218</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_form">FormActivity</string>
+    <string name="title_activity_form">Create meal</string>
     <string name="login_label">Login</string>
     <string name="create_meal_label">Create Meal</string>
 </resources>

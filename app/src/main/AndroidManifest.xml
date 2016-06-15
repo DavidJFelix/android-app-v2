@@ -38,11 +38,6 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <service
-            android:name=".DinnerSolutionsAPI"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".FormActivity"
             android:label="@string/title_activity_form"

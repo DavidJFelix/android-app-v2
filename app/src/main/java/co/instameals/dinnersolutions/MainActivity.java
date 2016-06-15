@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tabs)
     TabLayout tabLayout;
 
+    // FIXME remove these intents
+    Intent loginIntent;
+    Intent createMealIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         inject(this);
         ButterKnife.bind(this);
+
+        // FIXME remove these intents
+        createMealIntent = new Intent(this, FormActivity.class);
+        loginIntent = new Intent(this, LoginActivity.class);
 
         setSupportActionBar(toolbar);
         setupViewPager();
@@ -81,13 +89,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createMeal(View view) {
-        Intent intent = new Intent(this, FormActivity.class);
-        startActivity(intent);
+        startActivity(createMealIntent);
     }
 
     public void login(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        startActivity(loginIntent);
     }
 
     /**

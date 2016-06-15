@@ -1,7 +1,7 @@
 package co.instameals.dinnersolutions.api.v2
 
-import co.instameals.dinnersolutions.api.v2.model.*
-import co.instameals.dinnersolutions.api.v2.response.*
+import co.instameals.dinnersolutions.api.v2.models.*
+import co.instameals.dinnersolutions.api.v2.responses.*
 import rx.Observable
 
 class ApiV2Client(var dinnerSolutionsApiV2: DinnerSolutionsApiV2) {
